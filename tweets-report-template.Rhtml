@@ -1,0 +1,185 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>__TITLE__</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#">About</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Twitter data collector</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h1>__TITLE__</h1>
+        <!-- <p class="lead">Tweets by day</p> -->
+<!--begin.rcode  ComboExample, results='asis', tidy=FALSE, echo=FALSE
+  cat(M$html$chart)
+end.rcode-->
+
+      </div>
+
+      <div class="row marketing">
+        <div class="col-sm-4">
+           <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Top Hashtags</h3>
+              </div>
+              <div class="panel-body">
+
+
+<!--begin.rcode results='asis', echo=FALSE, comment=FALSE
+  print(xtable(hashtags), type="html",
+                          include.rownames=FALSE,
+                          include.colnames=FALSE,
+                          html.table.attributes="border=0")
+end.rcode-->
+
+              </div>
+           </div>
+        </div> <!-- end col -->
+
+        <div class="col-sm-4">
+           <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Top Mentions</h3>
+              </div>
+              <div class="panel-body">
+
+<!--begin.rcode results='asis', echo=FALSE, comment=FALSE
+  print(xtable(mentions), type="html",
+                          include.rownames=FALSE,
+                          include.colnames=FALSE,
+                          html.table.attributes="border=0")
+end.rcode-->
+
+              </div>
+           </div>
+         </div> <!-- end col -->
+
+        <div class="col-sm-4">
+           <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Top users</h3>
+              </div>
+              <div class="panel-body">
+
+<!--begin.rcode results='asis', echo=FALSE, comment=FALSE
+  print(xtable(users), type="html",
+                          include.rownames=FALSE,
+                          include.colnames=FALSE,
+                          html.table.attributes="border=0")
+end.rcode-->
+
+              </div>
+           </div>
+
+
+         </div> <!-- end col -->
+      </div>  <!-- end row -->
+
+      <div class="row marketing">
+
+        <div class="col-sm-4">
+           <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Reply to users</h3>
+              </div>
+              <div class="panel-body">
+
+<!--begin.rcode results='asis', echo=FALSE, comment=FALSE
+  print(xtable(reply_to_user), type="html",
+                          include.rownames=FALSE,
+                          include.colnames=FALSE,
+                          html.table.attributes="border=0")
+end.rcode-->
+
+              </div>
+           </div>
+        </div> <!-- end col -->
+        <div class="col-sm-4">
+           <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Top sources</h3>
+              </div>
+              <div class="panel-body">
+
+<!--begin.rcode results='asis', echo=FALSE, comment=FALSE
+  print(xtable(sources), type="html",
+                          include.rownames=FALSE,
+                          include.colnames=FALSE,
+                          html.table.attributes="border=0")
+end.rcode-->
+
+              </div>
+           </div>
+        </div> <!-- end col -->
+        
+        <div class="col-sm-4">
+           <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Languages</h3>
+              </div>
+              <div class="panel-body">
+
+<!--begin.rcode results='asis', echo=FALSE, comment=FALSE
+  print(xtable(languages), type="html",
+                          include.rownames=FALSE,
+                          include.colnames=FALSE,
+                          html.table.attributes="border=0")
+end.rcode-->
+
+              </div>
+           </div>
+        </div> <!-- end col -->
+
+      </div>  <!-- end row -->
+
+
+           <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Top Media</h3>
+              </div>
+              <div class="panel-body">
+<!--begin.rcode results='asis', echo=FALSE, comment=FALSE
+  for(c in media[,1]) {
+    a=sprintf("<p><img src=\"%s\" /></p>\n", c)
+    cat(a)
+  }
+  if (! skip.tweets) {print(xtable(tweets.merged), type="html",
+                          include.rownames=FALSE,
+                          include.colnames=FALSE,
+                          html.table.attributes="border=0")
+  } else { print("Tweets list was not requested") }
+end.rcode-->
+              </div>
+           </div>
+
+
+      <footer class="footer">
+        <p>Powered by OpenSource software: Apache <a href="http://hadoop.apache.org">Hadoop</a>,
+            <a href="http://spark.apache.org">Spark</a> and 
+             <a href="http://www.r-project.org">R</a> statistical language.
+        </p>
+      </footer>
+
+    </div> 
+  </body>
+</html>
+

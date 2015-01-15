@@ -1,0 +1,635 @@
+<html>
+  <head>
+<style type="text/css">
+.knitr.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+},
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0em 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage.left {
+  text-align: left;
+}
+.rimage.right {
+  text-align: right;
+}
+.rimage.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>opensource</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#">About</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Twitter data collector</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h1>opensource</h1>
+        <!-- <p class="lead">Tweets by day</p> -->
+<!-- LineChart generated in R 3.1.2 by googleVis 0.5.7 package -->
+<!-- Wed Jan 14 17:26:58 2015 -->
+
+
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataLineChartID3f8a61eb0c49 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+ "2014-12-01 ",
+18 
+],
+[
+ "2014-12-02 ",
+2537 
+],
+[
+ "2014-12-03 ",
+2503 
+],
+[
+ "2014-12-04 ",
+2478 
+],
+[
+ "2014-12-05 ",
+2180 
+],
+[
+ "2014-12-06 ",
+1586 
+],
+[
+ "2014-12-07 ",
+1448 
+],
+[
+ "2014-12-08 ",
+2139 
+],
+[
+ "2014-12-09 ",
+2256 
+],
+[
+ "2014-12-10 ",
+2419 
+],
+[
+ "2014-12-11 ",
+2195 
+],
+[
+ "2014-12-12 ",
+1934 
+],
+[
+ "2014-12-13 ",
+1540 
+],
+[
+ "2014-12-14 ",
+1603 
+],
+[
+ "2014-12-15 ",
+2397 
+],
+[
+ "2014-12-16 ",
+2419 
+],
+[
+ "2014-12-17 ",
+2277 
+],
+[
+ "2014-12-18 ",
+2335 
+],
+[
+ "2014-12-19 ",
+2254 
+],
+[
+ "2014-12-20 ",
+1643 
+],
+[
+ "2014-12-21 ",
+1326 
+],
+[
+ "2014-12-22 ",
+1914 
+],
+[
+ "2014-12-23 ",
+2045 
+],
+[
+ "2014-12-24 ",
+1698 
+],
+[
+ "2014-12-25 ",
+1294 
+],
+[
+ "2014-12-26 ",
+1559 
+],
+[
+ "2014-12-27 ",
+1650 
+],
+[
+ "2014-12-28 ",
+1591 
+],
+[
+ "2014-12-29 ",
+1919 
+],
+[
+ "2014-12-30 ",
+2227 
+],
+[
+ "2014-12-31 ",
+1722 
+],
+[
+ "2015-01-01 ",
+1407 
+],
+[
+ "2015-01-02 ",
+1799 
+],
+[
+ "2015-01-03 ",
+1432 
+],
+[
+ "2015-01-04 ",
+1321 
+],
+[
+ "2015-01-05 ",
+2090 
+],
+[
+ "2015-01-06 ",
+2416 
+],
+[
+ "2015-01-07 ",
+2548 
+],
+[
+ "2015-01-08 ",
+2158 
+],
+[
+ "2015-01-09 ",
+2331 
+],
+[
+ "2015-01-10 ",
+1444 
+],
+[
+ "2015-01-11 ",
+1478 
+],
+[
+ "2015-01-12 ",
+2224 
+],
+[
+ "2015-01-13 ",
+2383 
+] 
+];
+data.addColumn('string','V1');
+data.addColumn('number','V2');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartLineChartID3f8a61eb0c49() {
+var data = gvisDataLineChartID3f8a61eb0c49();
+var options = {};
+options["allowHtml"] = true;
+options["width"] =    600;
+options["height"] =    250;
+options["legend"] = null;
+options["title"] = "tweets by day";
+
+
+    var chart = new google.visualization.LineChart(
+    document.getElementById('LineChartID3f8a61eb0c49')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "corechart";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartLineChartID3f8a61eb0c49);
+})();
+function displayChartLineChartID3f8a61eb0c49() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID3f8a61eb0c49"></script>
+ 
+<!-- divChart -->
+  
+<div id="LineChartID3f8a61eb0c49" 
+  style="width: 600; height: 250;">
+</div>
+
+
+      </div>
+
+      <div class="row marketing">
+        <div class="col-sm-4">
+           <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Top Hashtags</h3>
+              </div>
+              <div class="panel-body">
+
+
+<!-- html table generated in R 3.1.2 by xtable 1.7-4 package -->
+<!-- Wed Jan 14 17:26:58 2015 -->
+<table border=0>
+  <tr> <td> opensource  </td> <td align="right"> 58924 </td> </tr>
+  <tr> <td> linux  </td> <td align="right"> 3638 </td> </tr>
+  <tr> <td> job  </td> <td align="right"> 3352 </td> </tr>
+  <tr> <td> jobs  </td> <td align="right"> 3014 </td> </tr>
+  <tr> <td> tweetmyjobs  </td> <td align="right"> 2494 </td> </tr>
+  <tr> <td> elettronica  </td> <td align="right"> 1883 </td> </tr>
+  <tr> <td> bigdata  </td> <td align="right"> 1502 </td> </tr>
+  <tr> <td> startup  </td> <td align="right"> 1406 </td> </tr>
+  <tr> <td> javascript  </td> <td align="right"> 1296 </td> </tr>
+  <tr> <td> cloud  </td> <td align="right"> 1052 </td> </tr>
+  <tr> <td> iot  </td> <td align="right"> 998 </td> </tr>
+  <tr> <td> tech  </td> <td align="right"> 886 </td> </tr>
+  <tr> <td> xampp  </td> <td align="right"> 779 </td> </tr>
+  <tr> <td> sfjp  </td> <td align="right"> 746 </td> </tr>
+  <tr> <td> openstack  </td> <td align="right"> 732 </td> </tr>
+  <tr> <td> devops  </td> <td align="right"> 725 </td> </tr>
+  <tr> <td> nodejs  </td> <td align="right"> 723 </td> </tr>
+  <tr> <td> php  </td> <td align="right"> 693 </td> </tr>
+  <tr> <td> software  </td> <td align="right"> 600 </td> </tr>
+  <tr> <td> opendata  </td> <td align="right"> 530 </td> </tr>
+   </table>
+
+
+              </div>
+           </div>
+        </div> <!-- end col -->
+
+        <div class="col-sm-4">
+           <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Top Mentions</h3>
+              </div>
+              <div class="panel-body">
+
+<!-- html table generated in R 3.1.2 by xtable 1.7-4 package -->
+<!-- Wed Jan 14 17:26:58 2015 -->
+<table border=0>
+  <tr> <td> opensourceway  </td> <td align="right"> 4278 </td> </tr>
+  <tr> <td> OpenSourceAgent  </td> <td align="right"> 2260 </td> </tr>
+  <tr> <td> eco_opensource  </td> <td align="right"> 1238 </td> </tr>
+  <tr> <td> apachefriends  </td> <td align="right"> 774 </td> </tr>
+  <tr> <td> i_robin  </td> <td align="right"> 515 </td> </tr>
+  <tr> <td> OpenSource_VR  </td> <td align="right"> 496 </td> </tr>
+  <tr> <td> LinuxForYou  </td> <td align="right"> 405 </td> </tr>
+  <tr> <td> Razer  </td> <td align="right"> 362 </td> </tr>
+  <tr> <td> OpenSourceOrg  </td> <td align="right"> 312 </td> </tr>
+  <tr> <td> CloudExpo  </td> <td align="right"> 259 </td> </tr>
+  <tr> <td> YouTube  </td> <td align="right"> 247 </td> </tr>
+  <tr> <td> olindata  </td> <td align="right"> 245 </td> </tr>
+  <tr> <td> StartupEco  </td> <td align="right"> 237 </td> </tr>
+  <tr> <td> github  </td> <td align="right"> 233 </td> </tr>
+  <tr> <td> ScottWNesbitt  </td> <td align="right"> 220 </td> </tr>
+  <tr> <td> cakephp  </td> <td align="right"> 213 </td> </tr>
+  <tr> <td> ThingsExpo  </td> <td align="right"> 209 </td> </tr>
+  <tr> <td> taigaio  </td> <td align="right"> 207 </td> </tr>
+  <tr> <td> jehb  </td> <td align="right"> 198 </td> </tr>
+  <tr> <td> JenWike  </td> <td align="right"> 197 </td> </tr>
+   </table>
+
+
+              </div>
+           </div>
+         </div> <!-- end col -->
+
+        <div class="col-sm-4">
+           <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Top users</h3>
+              </div>
+              <div class="panel-body">
+
+<!-- html table generated in R 3.1.2 by xtable 1.7-4 package -->
+<!-- Wed Jan 14 17:26:59 2015 -->
+<table border=0>
+  <tr> <td> OpenSourceAgent  </td> <td align="right"> 15600 </td> </tr>
+  <tr> <td> ElettronicaOpen  </td> <td align="right"> 1781 </td> </tr>
+  <tr> <td> OpenTechSource  </td> <td align="right"> 1361 </td> </tr>
+  <tr> <td> StartupEco  </td> <td align="right"> 946 </td> </tr>
+  <tr> <td> opensourceway  </td> <td align="right"> 772 </td> </tr>
+  <tr> <td> AmazeOpenSource  </td> <td align="right"> 671 </td> </tr>
+  <tr> <td> santhoshobject  </td> <td align="right"> 595 </td> </tr>
+  <tr> <td> BostonWebDevs  </td> <td align="right"> 491 </td> </tr>
+  <tr> <td> js_digest  </td> <td align="right"> 490 </td> </tr>
+  <tr> <td> LinuxForYou  </td> <td align="right"> 481 </td> </tr>
+  <tr> <td> AmazingInfoTech  </td> <td align="right"> 459 </td> </tr>
+  <tr> <td> olindata  </td> <td align="right"> 451 </td> </tr>
+  <tr> <td> JoinAccenture  </td> <td align="right"> 419 </td> </tr>
+  <tr> <td> ManifestStefany  </td> <td align="right"> 419 </td> </tr>
+  <tr> <td> tux_news  </td> <td align="right"> 359 </td> </tr>
+  <tr> <td> javascriptd  </td> <td align="right"> 328 </td> </tr>
+  <tr> <td> jpalmaer  </td> <td align="right"> 325 </td> </tr>
+  <tr> <td> OpenSourceUG  </td> <td align="right"> 325 </td> </tr>
+  <tr> <td> BAWorkplaces  </td> <td align="right"> 307 </td> </tr>
+  <tr> <td> InfoSysReddit  </td> <td align="right"> 306 </td> </tr>
+   </table>
+
+
+              </div>
+           </div>
+
+
+         </div> <!-- end col -->
+      </div>  <!-- end row -->
+
+      <div class="row marketing">
+
+        <div class="col-sm-4">
+           <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Reply to users</h3>
+              </div>
+              <div class="panel-body">
+
+<!-- html table generated in R 3.1.2 by xtable 1.7-4 package -->
+<!-- Wed Jan 14 17:26:59 2015 -->
+<table border=0>
+  <tr> <td> None  </td> <td align="right"> 80968 </td> </tr>
+  <tr> <td> prolinux_de  </td> <td align="right"> 131 </td> </tr>
+  <tr> <td> Razer  </td> <td align="right"> 108 </td> </tr>
+  <tr> <td> heiseopen  </td> <td align="right"> 105 </td> </tr>
+  <tr> <td> OpenSource_VR  </td> <td align="right">  58 </td> </tr>
+  <tr> <td> minliangtan  </td> <td align="right">  45 </td> </tr>
+  <tr> <td> opensourceway  </td> <td align="right">  31 </td> </tr>
+  <tr> <td> LinuxCommunity  </td> <td align="right">  28 </td> </tr>
+  <tr> <td> OpenSourceAgent  </td> <td align="right">  28 </td> </tr>
+  <tr> <td> apachefriends  </td> <td align="right">  20 </td> </tr>
+  <tr> <td> Microsoft  </td> <td align="right">  15 </td> </tr>
+  <tr> <td> StartupEco  </td> <td align="right">  13 </td> </tr>
+  <tr> <td> CloudBlogs  </td> <td align="right">  11 </td> </tr>
+  <tr> <td> OpenSourceUG  </td> <td align="right">  11 </td> </tr>
+  <tr> <td> TeamSasquatch  </td> <td align="right">  10 </td> </tr>
+  <tr> <td> JollaHQ  </td> <td align="right">   9 </td> </tr>
+  <tr> <td> Tom_opensource  </td> <td align="right">   9 </td> </tr>
+  <tr> <td> AquaXetine  </td> <td align="right">   7 </td> </tr>
+  <tr> <td> JamesLafferty  </td> <td align="right">   7 </td> </tr>
+  <tr> <td> KimDotcom  </td> <td align="right">   6 </td> </tr>
+   </table>
+
+
+              </div>
+           </div>
+        </div> <!-- end col -->
+        <div class="col-sm-4">
+           <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Top sources</h3>
+              </div>
+              <div class="panel-body">
+
+<!-- html table generated in R 3.1.2 by xtable 1.7-4 package -->
+<!-- Wed Jan 14 17:26:59 2015 -->
+<table border=0>
+  <tr> <td> IFTTT  </td> <td align="right"> 18736 </td> </tr>
+  <tr> <td> Twitter Web Client  </td> <td align="right"> 12435 </td> </tr>
+  <tr> <td> Twitter for Android  </td> <td align="right"> 5722 </td> </tr>
+  <tr> <td> Hootsuite  </td> <td align="right"> 4300 </td> </tr>
+  <tr> <td> twitterfeed  </td> <td align="right"> 3869 </td> </tr>
+  <tr> <td> Twitter for iPhone  </td> <td align="right"> 3782 </td> </tr>
+  <tr> <td> RoundTeam  </td> <td align="right"> 3324 </td> </tr>
+  <tr> <td> TweetDeck  </td> <td align="right"> 3300 </td> </tr>
+  <tr> <td> Twitter for Websites  </td> <td align="right"> 3143 </td> </tr>
+  <tr> <td> Tweet Old Post  </td> <td align="right"> 2035 </td> </tr>
+  <tr> <td> dlvr.it  </td> <td align="right"> 1873 </td> </tr>
+  <tr> <td> TweetMyJOBS  </td> <td align="right"> 1748 </td> </tr>
+  <tr> <td> SafeTweet by TweetMyJOBS  </td> <td align="right"> 1369 </td> </tr>
+  <tr> <td> Buffer  </td> <td align="right"> 1329 </td> </tr>
+  <tr> <td> Sprout Social  </td> <td align="right"> 1072 </td> </tr>
+  <tr> <td> Twitter for iPad  </td> <td align="right"> 847 </td> </tr>
+  <tr> <td> SourceForge.JP  </td> <td align="right"> 693 </td> </tr>
+  <tr> <td> Twitter for Mac  </td> <td align="right"> 616 </td> </tr>
+  <tr> <td> Facebook  </td> <td align="right"> 527 </td> </tr>
+  <tr> <td> JavaScript Digest  </td> <td align="right"> 490 </td> </tr>
+   </table>
+
+
+              </div>
+           </div>
+        </div> <!-- end col -->
+        
+        <div class="col-sm-4">
+           <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Languages</h3>
+              </div>
+              <div class="panel-body">
+
+<!-- html table generated in R 3.1.2 by xtable 1.7-4 package -->
+<!-- Wed Jan 14 17:26:59 2015 -->
+<table border=0>
+  <tr> <td> en  </td> <td align="right"> 67993 </td> </tr>
+  <tr> <td> fr  </td> <td align="right"> 3455 </td> </tr>
+  <tr> <td> it  </td> <td align="right"> 2642 </td> </tr>
+  <tr> <td> es  </td> <td align="right"> 2075 </td> </tr>
+  <tr> <td> und  </td> <td align="right"> 1583 </td> </tr>
+  <tr> <td> ja  </td> <td align="right"> 1576 </td> </tr>
+  <tr> <td> de  </td> <td align="right"> 1254 </td> </tr>
+  <tr> <td> nl  </td> <td align="right"> 635 </td> </tr>
+  <tr> <td> pt  </td> <td align="right"> 575 </td> </tr>
+  <tr> <td> in  </td> <td align="right"> 514 </td> </tr>
+  <tr> <td> ru  </td> <td align="right"> 408 </td> </tr>
+  <tr> <td> sk  </td> <td align="right"> 269 </td> </tr>
+  <tr> <td> da  </td> <td align="right"> 142 </td> </tr>
+  <tr> <td> el  </td> <td align="right"> 107 </td> </tr>
+  <tr> <td> lt  </td> <td align="right">  98 </td> </tr>
+  <tr> <td> ko  </td> <td align="right">  89 </td> </tr>
+  <tr> <td> pl  </td> <td align="right">  86 </td> </tr>
+  <tr> <td> tl  </td> <td align="right">  80 </td> </tr>
+  <tr> <td> tr  </td> <td align="right">  72 </td> </tr>
+  <tr> <td> et  </td> <td align="right">  69 </td> </tr>
+   </table>
+
+
+              </div>
+           </div>
+        </div> <!-- end col -->
+
+      </div>  <!-- end row -->
+
+
+           <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Top Media</h3>
+              </div>
+              <div class="panel-body">
+<p><img src="https://pbs.twimg.com/media/B5SbrXhCQAAdfae.jpg " /></p>
+<p><img src="https://pbs.twimg.com/media/B6NCQKLCcAAMLGc.jpg " /></p>
+<p><img src="https://pbs.twimg.com/media/B54ZfktCYAEtV8K.png " /></p>
+<p><img src="https://pbs.twimg.com/media/B5h1s1eIAAAnwDc.jpg " /></p>
+<p><img src="https://pbs.twimg.com/media/B7LY8J4IEAE_rqx.png " /></p>
+<p><img src="https://pbs.twimg.com/media/B4f11rCIMAEburS.jpg " /></p>
+<p><img src="https://pbs.twimg.com/media/B4pbrXXCAAADoae.jpg " /></p>
+<p><img src="https://pbs.twimg.com/media/B6bWoTWCEAALzUM.png " /></p>
+<p><img src="https://pbs.twimg.com/media/B6nHEK3IEAE1iOz.jpg " /></p>
+<p><img src="https://pbs.twimg.com/media/B6HRL83IgAEbBs4.png " /></p>
+<p><img src="https://pbs.twimg.com/media/B7MXRMZIYAAZEbi.jpg " /></p>
+<p><img src="https://pbs.twimg.com/media/B4bliTNCQAIproF.png " /></p>
+<p><img src="https://pbs.twimg.com/media/B38eqS2IYAAwA8q.png " /></p>
+<p><img src="https://pbs.twimg.com/media/B3dNxs3CEAIpw9h.png " /></p>
+<p><img src="https://pbs.twimg.com/media/B67FoeHIcAYxv0Q.jpg " /></p>
+<p><img src="https://pbs.twimg.com/media/B6NUrgvCEAApOSm.png " /></p>
+<p><img src="https://pbs.twimg.com/media/B5GaCJpCQAEvZ_J.jpg " /></p>
+<p><img src="https://pbs.twimg.com/media/B32rVg7CMAAJlau.jpg " /></p>
+<p><img src="https://pbs.twimg.com/media/B5PmhR1IAAEuUFs.jpg " /></p>
+<p><img src="https://pbs.twimg.com/media/B6u6kq_IYAA4IJA.png " /></p>
+[1] "Tweets list was not requested"
+
+              </div>
+           </div>
+
+
+      <footer class="footer">
+        <p>Powered by OpenSource software: Apache <a href="http://hadoop.apache.org">Hadoop</a>,
+            <a href="http://spark.apache.org">Spark</a> and 
+             <a href="http://www.r-project.org">R</a> statistical language.
+        </p>
+      </footer>
+
+    </div> 
+  </body>
+</html>
+
+
