@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>__TITLE__</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#">About</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Twitter data collector</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h1>__TITLE__</h1>
+      </div>
+
+
+           <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Tweets</h3>
+              </div>
+              <div class="panel-body">
+<!--begin.rcode results='asis', echo=FALSE, comment=FALSE
+   for(c in tweets.merged[,1]) {
+    a=sprintf("<p>%s</p>\n", c)
+    cat(a)
+  }
+end.rcode-->
+              </div>
+           </div>
+
+
+      <footer class="footer">
+        <p>Powered by OpenSource software: Apache <a href="http://hadoop.apache.org">Hadoop</a>,
+            <a href="http://spark.apache.org">Spark</a> and 
+             <a href="http://www.r-project.org">R</a> statistical language.
+        </p>
+      </footer>
+
+    </div> 
+  </body>
+</html>
+

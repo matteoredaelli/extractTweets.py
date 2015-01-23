@@ -162,11 +162,6 @@ end.rcode-->
     a=sprintf("<p><img src=\"%s\" /></p>\n", c)
     cat(a)
   }
-  if (! skip.tweets) {print(xtable(tweets.merged), type="html",
-                          include.rownames=FALSE,
-                          include.colnames=FALSE,
-                          html.table.attributes="border=0")
-  } else { print("Tweets list was not requested") }
 end.rcode-->
               </div>
            </div>

@@ -37,8 +37,8 @@ def javaTimestampToString(t):
   return time.strftime("%Y-%m-%d", time.localtime(t/1000))
 
 def cleanText(text):
-  t = unicode(text)
-  return t.replace("\n"," ")
+  t = re.sub('["\']', ' ', unicode(text))
+  return t.replace("\n"," ").replace("\t", " ").replace("  ", " ")
 
 def cleanTextForWordCount(text):
   t = cleanText(text).lower()
@@ -76,6 +76,7 @@ if __name__ == "__main__":
 
   ## extraxt tweets
   
+  tweets_texts = t.map(lambda t: (cleanText(t[3]),t[1],t[2])).map(lambda x: '\t'.join(unicode(i) for i in x)).repartition(1)
   ## extraxt stats from tweets
   tweets_by_days = count_items(t.map(lambda t: javaTimestampToString(t[0])))
   stats_hashtags = count_items(t.flatMap(lambda t: t[6])\
@@ -103,4 +104,3 @@ if __name__ == "__main__":
   stats_users_mentions.saveAsTextFile("%s/%s" % (args.target, "users_mentions"))
   stats_media.saveAsTextFile("%s/%s" % (args.target, "media"))
   tweets_by_days.saveAsTextFile("%s/%s" % (args.target, "tweets_by_day"))
-  

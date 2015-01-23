@@ -35,32 +35,30 @@ title <- args[1]
 source_path <- args[2]
 target_path <- args[3]
 top <- as.integer(args[4])
-skip.tweets <- ifelse(is.na(args[4]), FALSE, TRUE)
+include.tweets <- ifelse(is.na(args[4]), TRUE, FALSE)
 
-print(skip.tweets)
-
-template_file = "tweets-report-template.Rhtml"
+template_file = "report-template-tweetsStats.Rhtml"
 
 page = readChar(template_file, file.info(template_file)$size)
 page = gsub("__TITLE__", title, page)
 
-get_from_hadoop <- function(filename, sort=TRUE, filter.top=TRUE) {
+get_from_hadoop <- function(filename, sort=TRUE, top=NA) {
    fullfilename=file.path(source_path, filename, "part-00000?op=OPEN")
    print(sprintf("Opening file %s", fullfilename))
-   df = read.delim(fullfilename, header=FALSE)
+   df = tryCatch(read.delim(fullfilename, header=FALSE),  error=function(e) data.frame(V1=NA, V2=NA))
    if(sort) df = df[with(df, order(-V1,V2)),] 
-   if(filter.top) df = df[1:min(top,nrow(df)),] 
+   if(!is.na(top)) df = df[1:min(top,nrow(df)),] 
    return(data.frame(V1=paste(df$V2, ""), V2=df$V1))
 }
 
-hashtags =get_from_hadoop("hashtags")
-mentions =get_from_hadoop("users_mentions")
-media =get_from_hadoop("media")
-users =get_from_hadoop("users")
-reply_to_user =get_from_hadoop("reply_to_user")
-sources =get_from_hadoop("sources")
-languages =get_from_hadoop("langs")
-tweets.by.day =get_from_hadoop("tweets_by_day", sort=FALSE, filter.top=FALSE)
+hashtags =get_from_hadoop("hashtags", top=top)
+mentions =get_from_hadoop("users_mentions", top=top)
+media =get_from_hadoop("media", top=6)
+users =get_from_hadoop("users", top=top)
+reply_to_user =get_from_hadoop("reply_to_user", top=top)
+sources =get_from_hadoop("sources", top=top)
+languages =get_from_hadoop("langs", top=top)
+tweets.by.day =get_from_hadoop("tweets_by_day", sort=FALSE, top=NA)
 #tweets = "tweets", "part-00000?op=OPEN"), header=FALSE)
 #tweets$link = sprintf('<a href="https://twitter.com/%s/status/%s">%s</a>', tweets$V2, tweets$V3, tweets$V1)
 #tweets.merged <- as.data.frame(paste(tweets$V2, tweets$V1, tweets$V4, sep=" : "))
