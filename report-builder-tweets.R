@@ -25,27 +25,61 @@ library(xtable)
 library(knitr)
 library(methods) 
 
+library(googleVis)
+op <- options(gvis.plot.tag='chart')
+
 args <- commandArgs(TRUE)
 if (length(args) < 3) stop("Bad args, usage title input output")
 
 title <- args[1]
 source_path <- args[2]
 target_path <- args[3]
+top <- as.integer(args[4])
+include.tweets <- ifelse(is.na(args[5]) || args[5]=='', FALSE, TRUE)
 
 template_file = "report-template-tweets.Rhtml"
 
 page = readChar(template_file, file.info(template_file)$size)
 page = gsub("__TITLE__", title, page)
 
-get_from_hadoop <- function(filename) {
+get_from_hadoop <- function(filename, sort=TRUE, top=NA) {
    fullfilename=file.path(source_path, filename, "part-00000?op=OPEN")
    print(sprintf("Opening file %s", fullfilename))
    df = tryCatch(read.delim(fullfilename, header=FALSE),  error=function(e) data.frame(V1=NA, V2=NA))
+   if(sort) df = df[with(df, order(-V1,V2)),] 
+   if(!is.na(top)) df = df[1:min(top,nrow(df)),] 
    return(df)
 }
 
-tweets = get_from_hadoop("tweets")
-tweets$link = sprintf('<a href="https://twitter.com/%s/status/%s">%s</a>: %s', tweets$V2, tweets$V3, tweets$V2, tweets$V1)
+swap.df <- function(df) {
+   return(data.frame(Item=paste(df$V2, ""), Count=df$V1))
+}
+
+
+hashtags =swap.df(get_from_hadoop("hashtags", top=top))
+mentions =swap.df(get_from_hadoop("users_mentions", top=top))
+media =swap.df(get_from_hadoop("media", top=6))
+users =swap.df(get_from_hadoop("users", top=top))
+reply_to_user =swap.df(get_from_hadoop("reply_to_user", top=top))
+sources =swap.df(get_from_hadoop("sources", top=top))
+languages =swap.df(get_from_hadoop("langs", top=top))
+tweets.by.day =swap.df(get_from_hadoop("tweets_by_day", sort=FALSE, top=NA))
+
+if(include.tweets) {
+  tweets = get_from_hadoop("tweets", sort=FALSE)
+  tweets$link = sprintf('<a href="https://twitter.com/%s/status/%s">%s</a>: %s', tweets$V2, tweets$V3, tweets$V2, tweets$V1)
 #tweets.merged <- as.data.frame(paste(tweets$V2, tweets$V1, tweets$V4, sep=" : "))
-tweets.merged <- data.frame(tweets$link)
+  tweets.merged <- data.frame(tweets$link)
+} else {
+  tweets.merged=NULL
+}
+
+#M=gvisLineChart(tweets.by.day, xvar="V1", yvar="V2")
+tweets.by.day = tweets.by.day[with(tweets.by.day, order(Item)),]
+tweets.by.day.chart=gvisLineChart(tweets.by.day, options=list(width=400, 
+                                            height=250,
+                                            legend='none',
+                                            title="tweets by day"))
+default.options=list(width=200, allowHtml=TRUE)
+
 knit(text=page, output=target_path)
