@@ -103,6 +103,11 @@ if __name__ == "__main__":
   ## save stats from tweets to hdfs
     text.saveAsTextFile("%s/%s" % (args.target, "tweets"))
 
+  ## extraxt users
+  u = sqlContext.sql("SELECT id, user.id, user.name, user.screenName, user.location, user.description, user.followersCount, user.friendsCount, user.favouritesCount, user.statusesCount, user.lang, user.biggerProfileImageURLHttps FROM tweets")
+  text = u.map(lambda t: (t[1],t)).reduceByKey(lambda x,y: x if x[1] > y[1] else y).map(lambda t: t[1]).map(lambda x: '\t'.join(unicode(i) for i in x).replace("\n"," ")).repartition(1)
+  ## save stats from tweets to hdfs
+  text.saveAsTextFile("%s/%s" % (args.target, "users_details"))
 
   ## save stats from tweets to hdfs
   stats_hashtags.saveAsTextFile("%s/%s" % (args.target, "hashtags"))
