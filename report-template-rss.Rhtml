@@ -27,9 +27,9 @@
       </div>
 
       <div>
-        <!-- <p class="lead">Tweets by day</p> -->
+        <!-- <p class="lead">News by day</p> -->
 <!--begin.rcode  ComboExample, results='asis', tidy=FALSE, echo=FALSE
-  cat(tweets.by.day.chart$html$chart)
+  cat(news.by.day.chart$html$chart)
 end.rcode-->
 
       </div>
@@ -38,13 +38,13 @@ end.rcode-->
         <div class="col-sm-4">
            <div class="panel panel-primary">
               <div class="panel-heading">
-                <h3 class="panel-title">Top Hashtags</h3>
+                <h3 class="panel-title">Top Languages</h3>
               </div>
               <div class="panel-body">
 
 
 <!--begin.rcode results='asis', echo=FALSE, comment=FALSE
-  print(xtable(hashtags), type="html",
+  print(xtable(language), type="html",
                           include.rownames=FALSE,
                           include.colnames=FALSE,
                           html.table.attributes="border=0")
@@ -57,12 +57,12 @@ end.rcode-->
         <div class="col-sm-4">
            <div class="panel panel-primary">
               <div class="panel-heading">
-                <h3 class="panel-title">Top Mentions</h3>
+                <h3 class="panel-title">Top Sources</h3>
               </div>
               <div class="panel-body">
 
 <!--begin.rcode results='asis', echo=FALSE, comment=FALSE
-  print(xtable(mentions), type="html",
+  print(xtable(source), type="html",
                           include.rownames=FALSE,
                           include.colnames=FALSE,
                           html.table.attributes="border=0")
@@ -75,35 +75,12 @@ end.rcode-->
         <div class="col-sm-4">
            <div class="panel panel-primary">
               <div class="panel-heading">
-                <h3 class="panel-title">Top users</h3>
+                <h3 class="panel-title">Top categories</h3>
               </div>
               <div class="panel-body">
 
 <!--begin.rcode results='asis', echo=FALSE, comment=FALSE
-  print(xtable(users), type="html",
-                          include.rownames=FALSE,
-                          include.colnames=FALSE,
-                          html.table.attributes="border=0")
-end.rcode-->
-
-              </div>
-           </div>
-
-
-         </div> <!-- end col -->
-      </div>  <!-- end row -->
-
-      <div class="row marketing">
-
-        <div class="col-sm-4">
-           <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h3 class="panel-title">Reply to users</h3>
-              </div>
-              <div class="panel-body">
-
-<!--begin.rcode results='asis', echo=FALSE, comment=FALSE
-  print(xtable(reply_to_user), type="html",
+  print(xtable(category), type="html",
                           include.rownames=FALSE,
                           include.colnames=FALSE,
                           html.table.attributes="border=0")
@@ -112,69 +89,17 @@ end.rcode-->
               </div>
            </div>
         </div> <!-- end col -->
-        <div class="col-sm-4">
-           <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h3 class="panel-title">Top sources</h3>
-              </div>
-              <div class="panel-body">
-
-<!--begin.rcode results='asis', echo=FALSE, comment=FALSE
-  print(xtable(sources), type="html",
-                          include.rownames=FALSE,
-                          include.colnames=FALSE,
-                          html.table.attributes="border=0")
-end.rcode-->
-
-              </div>
-           </div>
-        </div> <!-- end col -->
-        
-        <div class="col-sm-4">
-           <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h3 class="panel-title">Languages</h3>
-              </div>
-              <div class="panel-body">
-
-<!--begin.rcode results='asis', echo=FALSE, comment=FALSE
-  print(xtable(languages), type="html",
-                          include.rownames=FALSE,
-                          include.colnames=FALSE,
-                          html.table.attributes="border=0")
-end.rcode-->
-
-              </div>
-           </div>
-        </div> <!-- end col -->
-
       </div>  <!-- end row -->
 
 
            <div class="panel panel-primary">
               <div class="panel-heading">
-                <h3 class="panel-title">Top Media</h3>
+                <h3 class="panel-title">News</h3>
               </div>
               <div class="panel-body">
 <!--begin.rcode results='asis', echo=FALSE, comment=FALSE
-  for(c in media[,1]) {
-    if(c != '') {
-      a=sprintf("<p><img src=\"%s\" /></p>\n", c)
-      cat(a)
-    }
-  }
-end.rcode-->
-              </div>
-           </div>
-
-           <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h3 class="panel-title">Tweets</h3>
-              </div>
-              <div class="panel-body">
-<!--begin.rcode results='asis', echo=FALSE, comment=FALSE
-   if( !is.null(tweets.merged)) {
-     for(c in tweets.merged[,1]) {
+   if( !is.null(news.merged)) {
+     for(c in news.merged[,1]) {
        if(c != '') {
          a=sprintf("<p>%s</p>\n", c)
          cat(a)
