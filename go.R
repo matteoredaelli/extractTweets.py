@@ -35,6 +35,7 @@ hdfspath_target=sprintf("/tmp/twitter/%s/%s/%s", dir, report, period)
 path_target=sprintf("/var/www/twitter/%s/%s/%s", dir, report, period)
 
 command=sprintf("hdfs dfs -rm -r %s/[a-z]*", hdfspath_target)
+print(command)
 system(command)
 
 command=sprintf("hdfs dfs -mkdir -p %s", hdfspath_target)
@@ -47,12 +48,14 @@ html_target=sprintf("/var/www/twitter/%s/%s/%s/%s%s_%s.html", dir,report,period,
 
 
 command=sprintf('spark-submit --master yarn-client extractTweets.py --source "%s/%s/%s*.gz" --target %s %s', hdfspath, report, period_with_slash, hdfspath_target, tweets)
+print(command)
 system(command)
 
 command=sprintf('Rscript report-builder-tweets.R "%s" "http://localhost:50070/webhdfs/v1%s" %s %s %s', title, hdfspath_target, html_target, top, tweets)
+print(command)
 system(command)
 
 if(!is.na(email) && email != '') {
-  command=sprintf('echo "" |mailx -s "%s_%s" -a %s %s', dir, report, html_target, mail)
+  command=sprintf('echo "" |mailx -s "%s_%s" -a %s %s', dir, report, html_target, email)
   system(command)
 }

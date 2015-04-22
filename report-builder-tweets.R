@@ -76,7 +76,7 @@ if(include.tweets) {
 
 #M=gvisLineChart(tweets.by.day, xvar="V1", yvar="V2")
 tweets.by.day = tweets.by.day[with(tweets.by.day, order(Item)),]
-tweets.by.day.chart=gvisLineChart(tweets.by.day, options=list(width=600, 
+tweets.by.day.chart=gvisColumnChart(tweets.by.day, options=list(width=600, 
                                             height=250,
                                             legend='none',
                                             title="tweets by day"))

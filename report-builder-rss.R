@@ -74,7 +74,8 @@ if(include.news) {
 
 #M=gvisLineChart(news.by.day, xvar="V1", yvar="V2")
 news.by.day = news.by.day[with(news.by.day, order(Item)),]
-news.by.day.chart=gvisLineChart(news.by.day, options=list(width=600, 
+#news.by.day.chart=gvisLineChart(news.by.day, options=list(width=600, 
+news.by.day.chart=gvisColumnChart(news.by.day, options=list(width=600, 
                                             height=250,
                                             legend='none',
                                             title="news by day"))

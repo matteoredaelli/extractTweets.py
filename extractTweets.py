@@ -38,7 +38,7 @@ def javaTimestampToString(t):
 
 def cleanText(text):
   t = re.sub('["\']', ' ', unicode(text))
-  return t.replace("\n"," ").replace("\t", " ").replace("  ", " ")
+  return t.replace("\n"," ").replace("\t", " ").replace("\r", " ").replace("  ", " ")
 
 def cleanTextForWordCount(text):
   t = cleanText(text).lower()
@@ -62,7 +62,7 @@ if __name__ == "__main__":
   parser.add_argument("--target", help="target path")
   parser.add_argument("--tweets", action="store_true",
                     help="include tweets")
-  parser.add_argument("--min_occurs", help="min occurences", default=2)
+  parser.add_argument("--min_occurs", help="min occurences", default=3)
 
   args = parser.parse_args()
 
@@ -105,7 +105,7 @@ if __name__ == "__main__":
 
   ## extraxt users
   u = sqlContext.sql("SELECT id, user.id, user.name, user.screenName, user.location, user.description, user.followersCount, user.friendsCount, user.favouritesCount, user.statusesCount, user.lang, user.biggerProfileImageURLHttps FROM tweets")
-  text = u.map(lambda t: (t[1],t)).reduceByKey(lambda x,y: x if x[1] > y[1] else y).map(lambda t: t[1]).map(lambda x: '\t'.join(unicode(i).replace("\n"," ") for i in x)).repartition(1)
+  text = u.map(lambda t: (t[1],t)).reduceByKey(lambda x,y: x if x[1] > y[1] else y).map(lambda t: t[1]).map(lambda x: '\t'.join(unicode(i).replace("\n"," ").replace("\r"," ") for i in x)).repartition(1)
   ## save stats from tweets to hdfs
   text.saveAsTextFile("%s/%s" % (args.target, "users_details"))
 
