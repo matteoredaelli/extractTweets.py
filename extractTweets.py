@@ -41,16 +41,19 @@ def cleanText(text):
   return t.replace("\n"," ").replace("\t", " ").replace("\r", " ").replace("  ", " ")
 
 def cleanTextForWordCount(text):
-  t = cleanText(text).lower()
+  # remove links
+  t = re.sub(r'(http?://.+)', "", text)
+  t = cleanText(t).lower()
   return re.sub('["(),-:!?#@/\'\\\]', ' ',t)
 
 def extractSourceText(text):
   return re.sub(r'<a href=.+>(.+)</a>', "\\1", text)
 
-def count_items(rdd):
+def count_items(rdd, min_occurs=2, min_length=3):
   return rdd.map(lambda t: (t, 1))\
             .reduceByKey(lambda x,y:x+y)\
             .filter(lambda x:x[1] >= min_occurs)\
+            .filter(lambda x:len(x[0]) >= min_length)\
             .map(lambda x:(x[1],x[0])).sortByKey(False)\
             .map(lambda x: '\t'.join(unicode(i) for i in x)).repartition(1)
      
@@ -69,12 +72,15 @@ if __name__ == "__main__":
   ## connecting to hdfs data
   source_path = args.source # /user/r/staging/twitter/searches/TheCalExperience.json/*/*/*.gz
   min_occurs = args.min_occurs
+  if min_occurs <= 0:
+     min_occurs = 3
+
   sc = SparkContext(appName="extraxtStatsFromTweets.py")
   sqlContext = SQLContext(sc)
   
   tweets = sqlContext.jsonFile(source_path)
   tweets.registerTempTable("tweets")
-  t = sqlContext.sql("SELECT distinct createdAt, user.screenName, id, text, source, lang,hashtagEntities,inReplyToScreenName,source,userMentionEntities,mediaEntities FROM tweets").cache()
+  t = sqlContext.sql("SELECT distinct createdAt, user.screenName, id, text, source, lang,hashtagEntities,inReplyToScreenName,source,userMentionEntities,mediaEntities FROM tweets")
 
   ## extraxt tweets
   

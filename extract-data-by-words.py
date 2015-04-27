@@ -38,20 +38,42 @@ from datetime import datetime
 from pyspark import SparkContext
 from pyspark.sql import SQLContext
 
-# twitter
-
-def javaTimestampToString(t):
-  return time.strftime("%Y-%m-%d", time.localtime(t/1000))
+########################################################
+#common functions
+########################################################
 
 def cleanText(text):
   t = re.sub('["\']', ' ', unicode(text))
   return t.replace("\n"," ").replace("\t", " ").replace("\r", " ").replace("  ", " ")
 
+def cleanTextForWordCount(text):
+  # remove links
+  t = re.sub(r'(http?://.+)', "", text)
+  t = cleanText(t).lower()
+  return re.sub('["(),-:!?#@/\'\\\]', ' ',t)
+
+def count_items(rdd, min_occurs=2, min_length=3):
+  return rdd.map(lambda t: (t, 1))\
+            .reduceByKey(lambda x,y:x+y)\
+            .filter(lambda x:x[1] >= min_occurs)\
+            .filter(lambda x:len(x[0]) >= min_length)\
+            .map(lambda x:(x[1],x[0])).sortByKey(False)\
+            .map(lambda x: '\t'.join(unicode(i) for i in x)).repartition(1)
+     
+########################################################
+# twitter
+########################################################
+
+def javaTimestampToString(t):
+  return time.strftime("%Y-%m-%d", time.localtime(t/1000))
+
 def build_tweet_url(screenName, id):
   return "https://twitter.com/%s/status/%s" % (screenName, id)
 # end twitter 
 
+########################################################
 ## for rrs
+########################################################
 
 def html_to_text(html):
   try:
@@ -74,21 +96,25 @@ def rss_string_to_list(line):
   root = rss_string_to_xml_object(line)
   title = cleanText(safe_root_find(root, 'title'))
   description = cleanText(html_to_text(safe_root_find(root, 'description')))
-  ##pubDate = safe_root_find(root, 'pubDate')[5:16]
+  pubDate = safe_root_find(root, 'pubDate')[5:16]
   ## carbuzz has not pubDate field... :-(
-  ##if pubDate == "":
-  ##	pubDate = "no date"
-  ##else:
-  ## 	pubDate = datetime.strptime(pubDate, '%d %b %Y').strftime("%Y-%m-%d")
+  if pubDate == "":
+  	pubDate = "no date"
+  else:
+   	pubDate = datetime.strptime(pubDate, '%d %b %Y').strftime("%Y-%m-%d")
 
   source = safe_root_find(root, 'rss_source')
   link = safe_root_find(root, 'link')
   ##language = safe_root_find(root, 'rss_language')
   ##category = safe_root_find(root, 'rss_category')
-  return (source,link ,title + ": "+ description)          
+  return (pubDate, source,link ,title + ": "+ description)          
 
 ##end rss
 
+########################################################
+# main
+
+########################################################
 if __name__ == "__main__":
 
   ####################################
@@ -123,11 +149,11 @@ if __name__ == "__main__":
   tweets = sqlContext.jsonFile(source_path_twitter)
   tweets.registerTempTable("tweets")
 
-  sql = "SELECT distinct user.screenName, id, text FROM tweets where upper(text) like '%%%s%%'" % word
+  sql = "SELECT distinct createdAt, user.screenName, id, text FROM tweets where upper(text) like '%%%s%%'" % word
   print sql
   rdd_twitter = sqlContext.sql(sql)
   #text.filter = rdd.filter(lambda t: t[2] and word in t[2].upper())
-  rdd_twitter = rdd_twitter.map(lambda t: ("twitter", build_tweet_url(t[0],t[1]), t[0] + ": " + unicode(cleanText(t[2]))))
+  rdd_twitter = rdd_twitter.map(lambda t: (javaTimestampToString(t[0]), "twitter/" + t[1], build_tweet_url(t[1],t[2]), unicode(cleanText(t[3]))))
 
   ##########################
   ## extract rss
@@ -135,10 +161,17 @@ if __name__ == "__main__":
   rdd_rss = sc.textFile(source_path_rss).distinct().filter(lambda t: word in t.upper()).map(rss_string_to_list)
   
   ##########################
-  ## saving
+  ## union results
   ##########################
   rdd = rdd_twitter.union(rdd_rss)
-  rdd.map(lambda x: '\t'.join(unicode(i).replace("\n"," ") for i in x)).repartition(1).saveAsTextFile(target_path)
+  stats_words = count_items(rdd.map(lambda t: cleanTextForWordCount(t[3]))\
+                                  .flatMap(lambda x: x.split()))
+
+  ##########################
+  ## saving
+  ##########################
+  rdd.map(lambda x: '\t'.join(unicode(i).replace("\n"," ") for i in x)).repartition(1).saveAsTextFile(target_path+"/news")
+  stats_words.saveAsTextFile(target_path+"/words")
 
   ##########################
   ## quitting
