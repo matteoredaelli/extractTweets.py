@@ -24,7 +24,7 @@
 #   spark-submit  --master yarn-client extract-data-from-words.py --source_twitter "/user/r/staging/twitter/searches/tyre/2014/12/*.gz" --target /tmp/tests/15
 
 ## output
-##  (todo picture_url), source, link, text
+##  (todo picture_url), day, source, link, text
 import json
 import re
 import sys
@@ -55,8 +55,8 @@ def cleanTextForWordCount(text):
 def count_items(rdd, min_occurs=2, min_length=3):
   return rdd.map(lambda t: (t, 1))\
             .reduceByKey(lambda x,y:x+y)\
-            .filter(lambda x:x[1] >= min_occurs)\
-            .filter(lambda x:len(x[0]) >= min_length)\
+            .filter(lambda x: x[1] >= min_occurs)\
+            .filter(lambda x: x[0] and len(x[0]) >= min_length)\
             .map(lambda x:(x[1],x[0])).sortByKey(False)\
             .map(lambda x: '\t'.join(unicode(i) for i in x)).repartition(1)
      
@@ -153,7 +153,7 @@ if __name__ == "__main__":
   print sql
   rdd_twitter = sqlContext.sql(sql)
   #text.filter = rdd.filter(lambda t: t[2] and word in t[2].upper())
-  rdd_twitter = rdd_twitter.map(lambda t: (javaTimestampToString(t[0]), "twitter/" + t[1], build_tweet_url(t[1],t[2]), unicode(cleanText(t[3]))))
+  rdd_twitter = rdd_twitter.map(lambda t: (javaTimestampToString(t[0]), "twitter/"+t[1], build_tweet_url(t[1],t[2]), unicode(cleanText(t[3]))))
 
   ##########################
   ## extract rss
@@ -166,12 +166,16 @@ if __name__ == "__main__":
   rdd = rdd_twitter.union(rdd_rss)
   stats_words = count_items(rdd.map(lambda t: cleanTextForWordCount(t[3]))\
                                   .flatMap(lambda x: x.split()))
+  stats_days = count_items(rdd.map(lambda t: t[0]))
+  stats_sources = count_items(rdd.map(lambda t: t[1]))
 
   ##########################
   ## saving
   ##########################
   rdd.map(lambda x: '\t'.join(unicode(i).replace("\n"," ") for i in x)).repartition(1).saveAsTextFile(target_path+"/news")
   stats_words.saveAsTextFile(target_path+"/words")
+  stats_days.saveAsTextFile(target_path+"/days")
+  stats_sources.saveAsTextFile(target_path+"/sources")
 
   ##########################
   ## quitting

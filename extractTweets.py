@@ -53,7 +53,7 @@ def count_items(rdd, min_occurs=2, min_length=3):
   return rdd.map(lambda t: (t, 1))\
             .reduceByKey(lambda x,y:x+y)\
             .filter(lambda x:x[1] >= min_occurs)\
-            .filter(lambda x:len(x[0]) >= min_length)\
+            .filter(lambda x:x[0] is not None and len(x[0]) >= min_length)\
             .map(lambda x:(x[1],x[0])).sortByKey(False)\
             .map(lambda x: '\t'.join(unicode(i) for i in x)).repartition(1)
      
